@@ -28,6 +28,7 @@ const database = [
   { firstName: 'Tom', lastName: 'Muller', birthDate: '2009-04-25', balance: 12.00, transactions: [
     { date: '2023-07-01 09:00', amount: 6.00 },
     { date: '2023-07-02 09:00', amount: -2.00 },
+    { date: '2023-07-02 09:01', amount: -2.50 },
     // Weitere Transaktionen...
   ] },
   // Weitere Kinder hinzufügen...
