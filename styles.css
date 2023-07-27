@@ -37,3 +37,42 @@ body {
     background: #0056b3;
   }
   
+  #search-results {
+    margin-top: 10px;
+  }
+  
+  #search-results div {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #search-results div:hover {
+    background: #f9f9f9;
+  }
+  
+  #search-results div strong {
+    font-size: 1.1em;
+  }
+  
+  #search-results div span {
+    color: #999;
+  }
+  
+  #transactions {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  #transactions th, #transactions td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
