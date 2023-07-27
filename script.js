@@ -36,6 +36,12 @@ const database = [
 
 let selectedChild = null;
 
+function getDayOfWeek(dateString) {
+  const date = new Date(dateString);
+  const days = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+  return days[date.getDay()];
+}
+
 searchInput.addEventListener('input', () => {
   const searchValue = searchInput.value.toLowerCase();
   const results = database.filter(child => {
@@ -57,7 +63,7 @@ searchInput.addEventListener('input', () => {
       transactionsTBody.innerHTML = '';
       child.transactions.forEach(transaction => {
         const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${transaction.date}</td><td>€${transaction.amount.toFixed(2)}</td>`;
+        tr.innerHTML = `<td>${getDayOfWeek(transaction.date)}</td><td>${transaction.date}</td><td>€${transaction.amount.toFixed(2)}</td>`;
         transactionsTBody.append(tr);
       });
       childDetailsDiv.hidden = false;
@@ -69,17 +75,18 @@ searchInput.addEventListener('input', () => {
 moneyForm.addEventListener('submit', (e) => {
   e.preventDefault();
   if (selectedChild) {
-    const amount = parseFloat(moneyInput.value);
+    const amount = parseFloat(moneyInput.value.replace(',', '.'));
     if (!isNaN(amount)) {
       selectedChild.balance += amount;
       const date = new Date();
+      const dateTimeString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
       selectedChild.transactions.push({
-        date: date.toLocaleDateString() + ' ' + date.toLocaleTimeString(),
+        date: dateTimeString,
         amount: amount
       });
       balanceElement.textContent = `Guthaben: €${selectedChild.balance.toFixed(2)}`;
       const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${date.toLocaleDateString()} ${date.toLocaleTimeString()}</td><td>€${amount.toFixed(2)}</td>`;
+      tr.innerHTML = `<td>${getDayOfWeek(dateTimeString)}</td><td>${dateTimeString}</td><td>€${amount.toFixed(2)}</td>`;
       transactionsTBody.prepend(tr);
       moneyInput.value = '';
     }
