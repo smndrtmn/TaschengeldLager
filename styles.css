@@ -91,7 +91,7 @@ button {
   text-align: left;
 }
 
-@media (max-width: 1200px) {
+@media (min-width: 1700px) {
   body {
     padding: 3em;  /* 1.5x increased padding */
     font-size: 1.8em;  /* 1.5x increased font size */
