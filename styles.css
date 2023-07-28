@@ -4,6 +4,7 @@ body {
   padding: 2em;
   max-width: 100%;
   margin: auto;
+  font-size: 1.2em;  /* erhöhte Schriftgröße */
 }
 
 h1 {
@@ -13,7 +14,7 @@ h1 {
 
 form {
   background: #fff;
-  padding: 1em;
+  padding: 1.5em;  /* erhöhter Padding */
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -21,7 +22,7 @@ form {
 input, button {
   display: block;
   width: 100%;
-  padding: 1em;
+  padding: 1.5em;  /* erhöhter Padding */
   margin: 0px;
   border-radius: 4px;
   border: 1px solid #ddd;
@@ -31,7 +32,7 @@ input, button {
 button {
   color: #fff;
   cursor: pointer;
-  margin-top: 1em;
+  margin-top: 1.5em;  /* erhöhter Margin */
 }
 
 #deposit-btn {
@@ -51,16 +52,16 @@ button {
 }
 
 #search-results {
-  margin-top: 1em;
+  margin-top: 1.5em;  /* erhöhter Margin */
 }
 
 #search-results div {
   background: #fff;
-  padding: 1em;
+  padding: 1.5em;  /* erhöhter Padding */
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;  /* erhöhter Margin */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -71,11 +72,12 @@ button {
 }
 
 #search-results div strong {
-  font-size: 1.1em;
+  font-size: 1.5em;  /* erhöhte Schriftgröße */
 }
 
 #search-results div span {
   color: #999;
+  font-size: 1.2em;  /* erhöhte Schriftgröße */
 }
 
 #transactions {
@@ -85,7 +87,7 @@ button {
 
 #transactions th, #transactions td {
   border: 1px solid #ddd;
-  padding: 1em;
+  padding: 1.5em;  /* erhöhter Padding */
   text-align: left;
 }
 
@@ -93,6 +95,7 @@ button {
   body {
     max-width: 600px;
     padding: 20px;
+    font-size: 1em;  /* Schriftgröße zurückgesetzt */
   }
   h1 {
     font-size: 2em;
@@ -112,6 +115,12 @@ button {
   #search-results div {
     padding: 20px;
     margin-bottom: 10px;
+  }
+  #search-results div strong {
+    font-size: 1.1em;  /* Schriftgröße zurückgesetzt */
+  }
+  #search-results div span {
+    font-size: 1em;  /* Schriftgröße zurückgesetzt */
   }
   #transactions th, #transactions td {
     padding: 10px;
