@@ -30,13 +30,24 @@ input, button {
 
 button {
   color: #fff;
-  background: #007BFF;
   cursor: pointer;
   margin-top: 10px;
 }
 
-button:hover {
-  background: #0056b3;
+#deposit-btn {
+  background: #28a745;
+}
+
+#withdraw-btn {
+  background: #dc3545;
+}
+
+#deposit-btn:hover {
+  background: #218838;
+}
+
+#withdraw-btn:hover {
+  background: #c82333;
 }
 
 #search-results {

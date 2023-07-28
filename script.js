@@ -3,6 +3,8 @@ const searchInput = document.querySelector('#search-input');
 const searchResults = document.querySelector('#search-results');
 const childDetailsDiv = document.querySelector('#child-details');
 const moneyForm = document.querySelector('#money-form');
+const depositBtn = document.querySelector('#deposit-btn');
+const withdrawBtn = document.querySelector('#withdraw-btn');
 const moneyInput = document.querySelector('#money-input');
 const childNameElement = document.querySelector('#child-name');
 const balanceElement = document.querySelector('#balance');
@@ -67,16 +69,38 @@ searchInput.addEventListener('input', () => {
         transactionsTBody.append(tr);
       });
       childDetailsDiv.hidden = false;
+      searchResults.hidden = true; // Verstecken Sie die Suchergebnisse
     });
     searchResults.append(div);
   });
 });
 
-moneyForm.addEventListener('submit', (e) => {
+depositBtn.addEventListener('click', (e) => {
   e.preventDefault();
   if (selectedChild) {
     const amount = parseFloat(moneyInput.value.replace(',', '.'));
     if (!isNaN(amount)) {
+      selectedChild.balance += amount;
+      const date = new Date();
+      const dateTimeString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+      selectedChild.transactions.push({
+        date: dateTimeString,
+        amount: amount
+      });
+      balanceElement.textContent = `Guthaben: €${selectedChild.balance.toFixed(2)}`;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${getDayOfWeek(dateTimeString)}</td><td>${dateTimeString}</td><td>€${amount.toFixed(2)}</td>`;
+      transactionsTBody.prepend(tr);
+      moneyInput.value = '';
+    }
+  }
+});
+
+withdrawBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (selectedChild) {
+    const amount = -parseFloat(moneyInput.value.replace(',', '.'));
+    if (!isNaN(amount) && (selectedChild.balance + amount) >= 0) {
       selectedChild.balance += amount;
       const date = new Date();
       const dateTimeString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
