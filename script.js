@@ -46,6 +46,14 @@ function getDayOfWeek(dateString) {
 
 searchInput.addEventListener('input', () => {
   const searchValue = searchInput.value.toLowerCase();
+  if (searchValue === '') {
+    searchResults.innerHTML = '';
+    return;
+  }
+  // Wenn die Suche beginnt, schließen Sie das Register und setzen Sie das ausgewählte Kind zurück.
+  selectedChild = null;
+  childDetailsDiv.hidden = true;
+
   const results = database.filter(child => {
     const name = child.firstName.toLowerCase() + ' ' + child.lastName.toLowerCase();
     return name.includes(searchValue);
@@ -69,7 +77,8 @@ searchInput.addEventListener('input', () => {
         transactionsTBody.append(tr);
       });
       childDetailsDiv.hidden = false;
-      searchResults.hidden = true; // Verstecken Sie die Suchergebnisse
+      searchInput.value = '';
+      searchResults.innerHTML = '';
     });
     searchResults.append(div);
   });
