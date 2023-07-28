@@ -91,37 +91,3 @@ button {
   text-align: left;
 }
 
-@media (min-width: 1700px) {
-  body {
-    padding: 3em;  /* 1.5x increased padding */
-    font-size: 1.8em;  /* 1.5x increased font size */
-  }
-  h1 {
-    font-size: 2.25em;  /* 1.5x increased font size */
-  }
-  form {
-    padding: 2.25em;  /* 1.5x increased padding */
-  }
-  input, button {
-    padding: 2.25em;  /* 1.5x increased padding */
-  }
-  button {
-    margin-top: 2.25em;  /* 1.5x increased margin */
-  }
-  #search-results {
-    margin-top: 2.25em;  /* 1.5x increased margin */
-  }
-  #search-results div {
-    padding: 2.25em;  /* 1.5x increased padding */
-    margin-bottom: 2.25em;  /* 1.5x increased margin */
-  }
-  #search-results div strong {
-    font-size: 2.25em;  /* 1.5x increased font size */
-  }
-  #search-results div span {
-    font-size: 1.8em;  /* 1.5x increased font size */
-  }
-  #transactions th, #transactions td {
-    padding: 2.25em;  /* 1.5x increased padding */
-  }
-}
