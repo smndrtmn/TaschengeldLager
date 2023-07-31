@@ -9,6 +9,8 @@ const moneyInput = document.querySelector('#money-input');
 const childNameElement = document.querySelector('#child-name');
 const balanceElement = document.querySelector('#balance');
 const transactionsTBody = document.querySelector('#transactions tbody');
+const addChildButton = document.querySelector('#add-child');
+const deleteAllButton = document.querySelector('#delete-all');
 
 // Simulierte Datenbank
 const database = [
@@ -122,6 +124,37 @@ withdrawBtn.addEventListener('click', (e) => {
       tr.innerHTML = `<td>${getDayOfWeek(dateTimeString)}</td><td>${dateTimeString}</td><td>€${amount.toFixed(2)}</td>`;
       transactionsTBody.prepend(tr);
       moneyInput.value = '';
+    }
+  }
+});
+
+addChildButton.addEventListener('click', () => {
+  console.log("click");
+  const firstName = prompt('Vorname des Kindes:');
+  const lastName = prompt('Nachname des Kindes:');
+  const birthDate = prompt('Geburtsdatum des Kindes (YYYY-MM-DD):');
+  database.push({
+    firstName,
+    lastName,
+    birthDate,
+    balance: 0,
+    transactions: []
+  });
+  alert(`Kind ${firstName} ${lastName} wurde hinzugefügt.`);
+});
+
+deleteAllButton.addEventListener('click', () => {
+  const childrenWithBalance = database.filter(child => child.balance > 0);
+  if (childrenWithBalance.length > 0) {
+    let errorMessage = 'Fehler: Die folgenden Kinder haben noch Guthaben:\n';
+    childrenWithBalance.forEach(child => {
+      errorMessage += `\n${child.firstName} ${child.lastName}: €${child.balance.toFixed(2)}`;
+    });
+    alert(errorMessage);
+  } else {
+    if (confirm('Sind Sie sicher, dass Sie alle Kinder löschen möchten?')) {
+      database.length = 0;
+      alert('Alle Kinder wurden gelöscht.');
     }
   }
 });
