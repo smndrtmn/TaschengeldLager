@@ -4,7 +4,43 @@
   <title>Taschengeld</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
   <link rel="icon" type="image/png" href="/images/favicon.png">
-  <script src="script.js" defer></script>
+  <script type="module">
+    import { initializeApp }   from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getFirestore }    from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+    import { getAuth, signInAnonymously }
+                               from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+  
+    const firebaseConfig = {
+      apiKey: "AIzaSyAWaUB9405PG-QeRpQ1LwyedGgdgl_eD2s",
+      authDomain: "taschengeldlager.firebaseapp.com",
+      projectId: "taschengeldlager",
+      storageBucket: "taschengeldlager.appspot.com",   // ← Standard-URL nehmen
+      messagingSenderId: "704943874523",
+      appId: "1:704943874523:web:3e3b2c1162fb0c5c4407fe"
+    };
+  
+    // 1) Firebase initialisieren
+    const app  = initializeApp(firebaseConfig);
+    const db   = getFirestore(app);
+    const auth = getAuth(app);
+  
+    // 2) Erst anonym einloggen …
+    signInAnonymously(auth)
+      .then(() => {
+        console.log('Anon-Login ok');
+        // 3) … dann db global setzen
+        window.db = db;
+        // 4) … und JETZT script.js nachladen
+        import('./script.js').catch(console.error);
+      })
+      .catch(err => {
+        console.error('Anon-Login failed:', err);
+        alert('Firebase-Login fehlgeschlagen – checke Auth-Einstellungen');
+      });
+  </script>
+  
+  
+
 </head>
 <body>
   <h1>Taschengeld</h1>
