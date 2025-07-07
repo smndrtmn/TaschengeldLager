@@ -55,7 +55,13 @@ function formatCurrency(value) {
 const childrenRef = collection(db, 'children');
 onSnapshot(childrenRef, (snapshot) => {
   // Cache aktualisieren
-  childrenCache = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
+  //childrenCache = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
+  // Cache aktualisieren + nach Nachname sortieren
+  childrenCache = snapshot.docs
+    .map(docSnap => ({ id: docSnap.id, ...docSnap.data() }))
+    .sort((a, b) =>
+      a.lastName.localeCompare(b.lastName, 'de', { sensitivity: 'base' })
+    );
 
   // Wenn ein Kind offen ist, dessen Saldo aktualisieren
   if (selectedChildId) {
@@ -74,7 +80,7 @@ onSnapshot(childrenRef, (snapshot) => {
 // 2 | Suche
 function renderSearchResults(term) {
   searchResults.innerHTML = '';
-  if (!term) return;
+  if (!term) term = '';
   const results = childrenCache
     .filter(c => (`${c.firstName} ${c.lastName}`.toLowerCase().includes(term)))
     .sort((a, b) => a.lastName.localeCompare(b.lastName));
