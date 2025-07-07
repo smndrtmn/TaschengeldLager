@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+  <title>Login</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding-top: 100px; }
+    input { font-size: 18px; padding: 10px; margin: 10px; }
+  </style>
+</head>
+<body>
+  <h2>🔐 Zugriff nur mit Passwort</h2>
+  <input type="password" id="pw" placeholder="Passwort">
+  <br>
+  <button onclick="check()">Einloggen</button>
+
+  <script>
+    const CORRECT_PW = "ferienlager2025"; // ← HIER ändern
+
+    function check() {
+      const entered = document.getElementById("pw").value;
+      if (entered === CORRECT_PW) {
+        localStorage.setItem("access", "granted");
+        window.location.href = "index.html"; // weiter zur Hauptseite
+      } else {
+        alert("Falsches Passwort 😬");
+      }
+    }
+  </script>
+</body>
+</html>
