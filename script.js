@@ -170,7 +170,7 @@ addChildButton.addEventListener('click', async () => {
   if (!firstName) return;
   const lastName  = prompt('Nachname des Kindes:');
   if (!lastName) return;
-  const birthDate = prompt('Geburtsdatum (YYYY-MM-DD):');
+  const birthDate = prompt('Geburtsdatum (DD.MM.YYYY):');
 
   await addDoc(childrenRef, {
     firstName,
