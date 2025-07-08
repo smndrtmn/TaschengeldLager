@@ -73,7 +73,10 @@ onSnapshot(childrenRef, (snapshot) => {
   }
 
   // Suchergebnisse ggf. neu rendern
-  renderSearchResults(searchInput.value.trim().toLowerCase());
+  //renderSearchResults(searchInput.value.trim().toLowerCase());
+  if (!selectedChildId) {
+     renderSearchResults(searchInput.value.trim().toLowerCase());
+   }
 });
 
 // -------------------------------------------------------------------------
