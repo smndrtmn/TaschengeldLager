@@ -88,7 +88,7 @@ function renderSearchResults(term) {
   results.forEach(child => {
     const div  = document.createElement('div');
     const name = document.createElement('strong');
-    name.textContent = `${child.firstName} ${child.lastName}`;
+    name.textContent = ` ${child.lastName}, ${child.firstName}`;
     const birth = document.createElement('span');
     birth.textContent = child.birthDate;
     div.append(name, birth);
