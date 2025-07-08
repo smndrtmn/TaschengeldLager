@@ -63,7 +63,7 @@ button {
   cursor: pointer;
   margin-bottom: 1.5em;
   display: flex;
-  justify-content: space-between;
+  justify-content:flex-start;
   align-items: center;
 }
 
@@ -75,9 +75,18 @@ button {
   font-size: 1.5em;
 }
 
+#search-results div strong:last-of-type {
+  margin-left: auto;
+  font-weight: bold;
+  text-align: right;
+}
+
+
 #search-results div span {
   color: #999;
+  padding-left: 1.5em;
   font-size: 1.2em;
+  
 }
 
 #transactions {

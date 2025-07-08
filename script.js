@@ -90,8 +90,10 @@ function renderSearchResults(term) {
     const name = document.createElement('strong');
     name.textContent = ` ${child.lastName}, ${child.firstName}`;
     const birth = document.createElement('span');
+    const balance = document.createElement('strong');
     birth.textContent = child.birthDate;
-    div.append(name, birth);
+    balance.textContent = formatCurrency(child.balance).replace('.', ',');
+    div.append(name, birth, balance);
 
     div.addEventListener('click', () => openChild(child.id));
     searchResults.append(div);
