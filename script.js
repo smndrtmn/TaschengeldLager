@@ -61,7 +61,11 @@ onSnapshot(childrenRef, (snapshot) => {
     .map(docSnap => ({ id: docSnap.id, ...docSnap.data() }))
     .sort((a, b) =>
       a.lastName.localeCompare(b.lastName, 'de', { sensitivity: 'base' })
-    );
+  );
+  
+  const totalBalance = childrenCache.reduce((sum, c) => sum + (c.balance || 0), 0);
+document.getElementById('total-balance').textContent = `Gesamtsumme: ${formatCurrency(totalBalance)}`;
+
 
   // Wenn ein Kind offen ist, dessen Saldo aktualisieren
   if (selectedChildId) {

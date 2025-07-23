@@ -123,3 +123,11 @@ button {
 #add-child:hover, #delete-all:hover {
   background: #0056b3;
 }
+
+#total-balance {
+  text-align: center;
+  font-size: 1.6em;
+  margin-top: 1em;
+  color: #333;
+  font-weight: bold;
+}
