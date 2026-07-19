@@ -39,6 +39,9 @@ let childrenCache = [];        // Alle Kinder aus der DB (für Suchen etc.)
 let selectedChildId = null;    // Aktuell geöffnetes Kind (Dokumenten‑ID)
 let unsubscribeTransactions;   // Funktion zum Abbestellen des Tx‑Listeners
 
+// Kleinere Abweichungen als ein halber Cent sind Rundungsreste von Fließkommazahlen.
+const BALANCE_EPSILON = 0.005;
+
 // -------------------------------------------------------------------------
 // Hilfsfunktionen
 function getDayOfWeek(date) {
@@ -198,7 +201,9 @@ addChildButton.addEventListener('click', async () => {
 // -------------------------------------------------------------------------
 // 6 | Alle Kinder löschen (nur wenn alle Salden = 0)
 deleteAllButton.addEventListener('click', async () => {
-  const childrenWithBalance = childrenCache.filter(c => c.balance > 0);
+  const childrenWithBalance = childrenCache.filter(
+    c => Math.abs(Number(c.balance) || 0) >= BALANCE_EPSILON
+  );
   if (childrenWithBalance.length) {
     let msg = 'Fehler: Diese Kinder haben noch Guthaben:\n';
     childrenWithBalance.forEach(c => { msg += `\n${c.firstName} ${c.lastName}: ${formatCurrency(c.balance)}`; });
