@@ -35,6 +35,11 @@ button {
   margin-top: 1.5em;
 }
 
+button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
 #deposit-btn {
   background: #28a745;
 }
@@ -102,14 +107,15 @@ button {
 
 #button-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 1em;
   margin-top: 1em;
 }
 
-#add-child, #delete-all {
-  flex: 1;
-  margin: 0 ;
+#add-child, #import-children, #delete-all {
+  flex: 1 1 12em;
+  margin: 0;
   padding: 1em;
   background: #007bff;
   color: white;
@@ -120,8 +126,36 @@ button {
   transition: background 0.3s;
 }
 
+#import-children {
+  background: #17a2b8;
+}
+
 #add-child:hover, #delete-all:hover {
   background: #0056b3;
+}
+
+#import-children:hover:not(:disabled) {
+  background: #117a8b;
+}
+
+#csv-help {
+  color: #666;
+  font-size: 0.9em;
+  margin: 0.8em 0 0;
+}
+
+#import-status {
+  min-height: 1.2em;
+  margin: 0.5em 0 0;
+  font-weight: bold;
+}
+
+#import-status.success {
+  color: #218838;
+}
+
+#import-status.error {
+  color: #c82333;
 }
 
 #total-balance {
