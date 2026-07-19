@@ -30,7 +30,7 @@ const deleteAllButton    = document.querySelector('#delete-all');
 // Firebase – nur die Module, die wir benötigen:
 import {
   collection, doc, addDoc, updateDoc, deleteDoc,
-  onSnapshot, query, orderBy, increment, writeBatch
+  onSnapshot, query, orderBy, increment
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // Das Firestore‑Handle kommt aus index.html (window.db)
@@ -224,15 +224,13 @@ function parseChildrenCsv(csvText) {
   return { children, duplicateCount, invalidRows };
 }
 
-async function saveImportedChildren(children) {
-  // Firestore erlaubt höchstens 500 Schreibvorgänge pro Batch.
-  const batchSize = 450;
-  for (let start = 0; start < children.length; start += batchSize) {
-    const batch = writeBatch(db);
-    children.slice(start, start + batchSize).forEach(child => {
-      batch.set(doc(childrenRef), child);
-    });
-    await batch.commit();
+async function saveImportedChildren(children, onProgress) {
+  // Einzelne Schreibvorgänge nutzen denselben erlaubten Firestore-Pfad wie
+  // die manuelle Anlage. Große Batched Writes können an den Regel-Limits
+  // für Dokumentzugriffe scheitern und dann "insufficient permissions" melden.
+  for (let index = 0; index < children.length; index += 1) {
+    await addDoc(childrenRef, children[index]);
+    onProgress?.(index + 1);
   }
 }
 
@@ -414,8 +412,10 @@ csvFileInput.addEventListener('change', async () => {
       return;
     }
 
-    setImportStatus(`${children.length} Kind(er) werden importiert …`);
-    await saveImportedChildren(children);
+    setImportStatus(`0 von ${children.length} Kind(er) importiert …`);
+    await saveImportedChildren(children, importedCount => {
+      setImportStatus(`${importedCount} von ${children.length} Kind(er) importiert …`);
+    });
 
     const summary = [`${children.length} Kind(er) importiert.`];
     if (duplicateCount) summary.push(`${duplicateCount} Dublette(n) übersprungen.`);
